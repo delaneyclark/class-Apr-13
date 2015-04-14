@@ -1,48 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PLACES MY GRANDMA HAS LIVED</title>
+    <title>Places my grandma has lived</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <style>
-      html, body, #map-canvas {
-        height: 100%;
-        margin: 0px;
-        padding: 0px
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="http://cooper-union-maps-proxy.herokuapp.com/js/draw.js"></script>
+    <script>
+      $(document).ready(function(){
+        var mapOptions = {
+          zoom: 19,
+          center: new google.maps.LatLng(40.7293, -73.9906)
+        };
+        var positions = [
+          {
+            'title':'LANCASTER PA',
+            'map': new google.maps.LatLng(40.0399754,-76.300349),
+            'link':'http://cooper.edu'
+          },
+          {
+            'title':'LA CANADA CA',
+            'map':new google.maps.LatLng(34.210687,-118.20047),
+            'link':'http://cooper.edu'
+          },
+          {
+            'title':'SOMEWHERE IN CONNETICUT',
+            'map': new google.maps.LatLng(41.7656875,-72.680087),
+            'link':'http://cooper.edu'
+          }
+        ];
+        draw('map', mapOptions, positions);
+      });
+      // google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+        <style>
+      #map {
+        height:200px;
+        width:1000px;
       }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-    <script>
-      var map;
-      var initialize = function() {
-        var mapOptions = {
-          zoom: 4,
-          center: new google.maps.LatLng(40.8066117,-95.22803)
-        };
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-            mapOptions);
-        var myLatlng = new google.maps.LatLng(40.7293, -73.9906);
-        var positions = [
-          new google.maps.LatLng(40.0399754,-76.300349),
-          new google.maps.LatLng(34.210687,-118.20047),
-          new google.maps.LatLng(41.7656875,-72.680087)
-        ];
-        var markers = [];
-        //create all of the markers on the map
-        for (position in positions) {
-          // To add the marker to the map, use the 'map' property
-          markers[position] = new google.maps.Marker({
-              position: positions[position],
-              map: map,
-              title:"Hello World " + Math.floor(Math.random() * 100),
-              // icon: 'http://placehold.it/24x50' //url to images
-          });
-        }
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
   </head>
   <body>
-    <div id="map-canvas"></div>
+    <div id="map"></div>
   </body>
 </html>
